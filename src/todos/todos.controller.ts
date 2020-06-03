@@ -1,6 +1,8 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Post, Body } from "@nestjs/common";
 import { TodosService } from "./todos.service";
-import { TodoEntity } from "./todo.entity";
+import { TodoEntity } from "./model/todo.entity";
+import { CreateTodoDto } from "./dto/todo.dto";
+import { SuccessDto } from "src/shared/model/success.dto";
 
 @Controller("todos")
 export class TodosController {
@@ -9,5 +11,10 @@ export class TodosController {
   @Get()
   getTodos(): Promise<TodoEntity[]> {
     return this.todosService.getTodos();
+  }
+
+  @Post()
+  createTodo(@Body() todo: CreateTodoDto): Promise<SuccessDto> {
+    return this.todosService.createTodo(todo);
   }
 }
