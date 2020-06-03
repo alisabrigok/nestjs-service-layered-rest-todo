@@ -22,6 +22,14 @@ export class TodosService {
     }
   }
 
+  async getTodoById(id: string): Promise<TodoEntity> {
+    try {
+      return this.todoRepo.findOne(id);
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
+  }
+
   async createTodo(todo: CreateTodoDto): Promise<SuccessDto> {
     try {
       await this.todoRepo.insert(todo);
@@ -31,7 +39,7 @@ export class TodosService {
     }
   }
 
-  async updateTodo(
+  async updateTodoById(
     id: string,
     updatedTodo: CreateTodoDto,
   ): Promise<SuccessDto> {
@@ -43,7 +51,7 @@ export class TodosService {
     }
   }
 
-  async deleteTodo(id: string): Promise<SuccessDto> {
+  async deleteTodoById(id: string): Promise<SuccessDto> {
     try {
       await this.todoRepo.update({ id }, { isDeleted: true });
       return this.messageService.success();

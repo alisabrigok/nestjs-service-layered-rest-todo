@@ -21,6 +21,11 @@ export class TodosController {
     return this.todosService.getTodos();
   }
 
+  @Get(":id")
+  getTodo(@Param("id") id: string): Promise<TodoEntity> {
+    return this.todosService.getTodoById(id);
+  }
+
   @Post()
   createTodo(@Body() todo: CreateTodoDto): Promise<SuccessDto> {
     return this.todosService.createTodo(todo);
@@ -31,11 +36,11 @@ export class TodosController {
     @Param("id") id: string,
     @Body() updatedTodo: CreateTodoDto,
   ): Promise<SuccessDto> {
-    return this.todosService.updateTodo(id, updatedTodo);
+    return this.todosService.updateTodoById(id, updatedTodo);
   }
 
   @Delete(":id")
   deleteTodo(@Param("id") id: string): Promise<SuccessDto> {
-    return this.todosService.deleteTodo(id);
+    return this.todosService.deleteTodoById(id);
   }
 }
