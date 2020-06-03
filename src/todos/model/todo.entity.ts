@@ -20,6 +20,9 @@ export class TodoEntity {
   @Column({ default: false })
   isDone: boolean;
 
+  @Column({ default: false })
+  isDeleted: boolean;
+
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;
 

@@ -2,8 +2,8 @@ import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TodoEntity } from "./model/todo.entity";
 import { Repository } from "typeorm";
-import { CreateTodoDto, UpdateTodoDto } from "./dto/todo.dto";
-import { SuccessDto } from "src/shared/model/success.dto";
+import { CreateTodoDto } from "./dto/todo.dto";
+import { SuccessDto } from "src/shared/dto/success.dto";
 import { MessageService } from "src/shared/services/message.service";
 
 @Injectable()
@@ -31,9 +31,21 @@ export class TodosService {
     }
   }
 
-  async updateTodo(id: string, data: UpdateTodoDto): Promise<SuccessDto> {
+  async updateTodo(
+    id: string,
+    updatedTodo: CreateTodoDto,
+  ): Promise<SuccessDto> {
     try {
-      await this.todoRepo.update({ id }, data);
+      await this.todoRepo.update({ id }, updatedTodo);
+      return this.messageService.success();
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
+  }
+
+  async deleteTodo(id: string): Promise<SuccessDto> {
+    try {
+      await this.todoRepo.update({ id }, { isDeleted: true });
       return this.messageService.success();
     } catch (err) {
       throw new InternalServerErrorException();
