@@ -1,8 +1,8 @@
-import { IsNotEmpty, IsString, IsBoolean, IsOptional } from "class-validator";
+import { IsString, IsBoolean, IsOptional } from "class-validator";
+import { IsNotEmptyString } from "src/shared/decorators/customValidation";
 
 export class CreateTodoDto {
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmptyString()
   title: string;
 
   @IsOptional()
