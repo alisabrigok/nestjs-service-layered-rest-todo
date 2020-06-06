@@ -1,0 +1,6 @@
+{
+  "helloWorld": "Merhaba Sevgili iPhonedo İzleyicileri",
+  "validation": {
+    "emptyStringError": "{{ input }} boş bir değer olamaz."
+  }
+}

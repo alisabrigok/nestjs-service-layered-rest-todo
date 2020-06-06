@@ -3,6 +3,7 @@ import {
   ValidationOptions,
   buildMessage,
 } from "class-validator";
+import i18n from "src/config/i18n";
 
 /**
  * Checks if a given value is not empty string when it's trimmed.
@@ -24,7 +25,10 @@ export function IsNotEmptyString(validationOptions?: ValidationOptions) {
       validator: {
         validate: (value): boolean => isNotEmptyString(value),
         defaultMessage: buildMessage(
-          eachPrefix => eachPrefix + "$property should not be empty string",
+          eachPrefix =>
+            eachPrefix +
+            i18n.__("validation.emptyStringError", { input: "$property" }),
+          // eachPrefix + "$property should not be empty string",
           validationOptions,
         ),
       },

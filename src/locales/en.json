@@ -1,0 +1,6 @@
+{
+  "helloWorld": "Hello World",
+  "validation": {
+    "emptyStringError": "{{ input }} can not be empty value."
+  }
+}
